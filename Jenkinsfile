@@ -1,10 +1,8 @@
 pipeline {
     agent any
-
-    tools{
-      maven 'Maven 3.5.4'
+    tools {
+        maven 'Maven 3.5.4'
     }
-
     stages {
         stage('Build') {
             steps {
@@ -21,8 +19,8 @@ pipeline {
         stage('Package') {
             steps {
                 echo 'Deploying....'
-                sh 'mvn -DskipTests package'
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                sh 'mvn package -DskipTests'
+                archiveArtifacts artifacts '**/target/*.jar', fingerprint: true
             }
         }
     }
